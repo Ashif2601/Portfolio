@@ -7,65 +7,128 @@
   <meta name="description" content="Professional resume portfolio for Mohammed Ashif, a Java developer skilled in Spring Boot, MySQL, and software development." />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f7fbff;--card:#ffffff;--accent:#0b3d91;--muted:#6b7280;--radius:12px;--max-width:1000px;
+    :root {
+      --bg:#f7fbff;--card:#ffffff;--accent:#0b3d91;--muted:#6b7280;
+      --radius:12px;--max-width:1000px;
     }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:'Poppins',sans-serif;background:var(--bg);color:#0f1724}
-    .container{max-width:var(--max-width);margin:36px auto;padding:24px}
-    header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .avatar{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#2b6fb6);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px}
-    nav a{margin-left:14px;text-decoration:none;color:var(--muted);font-weight:600}
-    nav a.active{color:var(--accent)}
-    main{display:grid;gap:18px}
-    .card{background:var(--card);border-radius:var(--radius);box-shadow:0 6px 20px rgba(11,61,145,0.06);padding:22px}
-    .btn{background:var(--accent);color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:600}
-    .btn.ghost{background:transparent;border:1px solid #e6eefc;color:var(--accent)}
-    footer{text-align:center;margin-top:20px;color:var(--muted);font-size:13px}
+    * { box-sizing:border-box; scroll-behavior:smooth; }
+    body {
+      margin:0; font-family:'Poppins',sans-serif;
+      background:var(--bg); color:#0f1724; overflow-x:hidden;
+    }
+    .container { max-width:var(--max-width); margin:0 auto; padding:24px; }
+
+    /* Sticky header */
+    header {
+      position:sticky; top:0; z-index:999;
+      background:rgba(255,255,255,0.8);
+      backdrop-filter:blur(10px);
+      display:flex; justify-content:space-between; align-items:center;
+      padding:14px 24px;
+      box-shadow:0 2px 10px rgba(11,61,145,0.08);
+      border-radius:0 0 12px 12px;
+    }
+
+    .brand { display:flex; align-items:center; gap:12px; }
+    .avatar {
+      width:48px; height:48px; border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#2b6fb6);
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-weight:700; font-size:16px;
+    }
+
+    nav a {
+      margin-left:14px; text-decoration:none; color:var(--muted);
+      font-weight:600; transition:color .2s;
+    }
+    nav a:hover { color:var(--accent); }
+    nav a.active { color:var(--accent); }
+
+    main { display:grid; gap:18px; margin-top:24px; }
+    .card {
+      background:var(--card); border-radius:var(--radius);
+      box-shadow:0 6px 20px rgba(11,61,145,0.06); padding:22px;
+      opacity:0; transform:translateY(30px);
+      transition:opacity 0.8s ease, transform 0.8s ease;
+    }
+    .card.visible {
+      opacity:1; transform:translateY(0);
+    }
+    .btn {
+      background:var(--accent); color:white; padding:10px 14px;
+      border-radius:10px; text-decoration:none; font-weight:600;
+      transition:background .3s, transform .2s;
+      display:inline-block;
+    }
+    .btn:hover { background:#124bb0; transform:translateY(-2px); }
+    .btn.ghost { background:transparent; border:1px solid #e6eefc; color:var(--accent); }
+
+    footer { text-align:center; margin-top:20px; color:var(--muted); font-size:13px; }
+
     /* Hero section */
-    .hero{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:24px;background:linear-gradient(135deg,#eaf1ff,#ffffff);padding:24px;border-radius:var(--radius)}
-    .hero img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:4px solid var(--accent)}
-    .hero-text{flex:1}
-    .hero-text h1{margin:0;color:var(--accent);font-size:28px}
-    .hero-text p{margin:10px 0;color:var(--muted)}
+    .hero {
+      display:flex; align-items:center; gap:24px; flex-wrap:wrap;
+      margin-bottom:24px; background:linear-gradient(135deg,#eaf1ff,#ffffff);
+      padding:24px; border-radius:var(--radius);
+      opacity:0; transform:translateY(40px);
+      transition:opacity 1s ease, transform 1s ease;
+    }
+    .hero.visible { opacity:1; transform:translateY(0); }
+    .hero img {
+      width:160px; height:160px; border-radius:50%;
+      object-fit:cover; border:4px solid var(--accent);
+    }
+    .hero-text { flex:1; }
+    .hero-text h1 { margin:0; color:var(--accent); font-size:28px; }
+    .hero-text p { margin:10px 0; color:var(--muted); }
+
+    /* Projects */
+    .projects-grid { display:grid; gap:16px; }
+    .proj { padding:10px 0; border-bottom:1px solid #e6eefc; }
+    .proj:last-child { border:none; }
+    .proj h4 { margin:0 0 4px; color:var(--accent); }
+    .proj a { color:var(--accent); font-weight:600; text-decoration:none; }
+    .proj a:hover { text-decoration:underline; }
+
+    /* Fade-in stagger */
+    .stagger { transition-delay: var(--delay, 0s); }
   </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <div class="brand">
-      <div class="avatar">MA</div>
-      <div>
-        <div style="font-weight:700">Mohammed Ashif</div>
-        <div style="font-size:13px;color:var(--muted)">Java Developer | Software Engineer</div>
-      </div>
+<header>
+  <div class="brand">
+    <div class="avatar">MA</div>
+    <div>
+      <div style="font-weight:700">Mohammed Ashif</div>
+      <div style="font-size:13px;color:var(--muted)">Java Developer</div>
     </div>
-    <nav>
-      <a href="#about" class="active">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#skills">Skills</a>
-      <a href="#resume">Resume</a>
-      <a href="#contact">Contact</a>
-      <a href="#blog">Blog</a>
-    </nav>
-  </header>
+  </div>
+  <nav>
+    <a href="#about" class="active">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#resume">Resume</a>
+    <a href="#contact">Contact</a>
+    <a href="#blog">Blog</a>
+  </nav>
+</header>
 
-  <section class="hero">
+<div class="container">
+  <section class="hero stagger" style="--delay:0.1s;">
     <img src="images/profile.jpg" alt="Mohammed Ashif" onerror="this.style.display='none'">
     <div class="hero-text">
       <h1>Mohammed Ashif</h1>
       <h3>Java Developer | Software Engineer</h3>
-      <p>Computer Science Engineer passionate about building reliable and efficient software. Experienced with Java, Spring Boot, MySQL, and backend system design.</p>
+      <p>Passionate Computer Science Engineer specializing in backend development using Java, Spring Boot, and MySQL. I love creating efficient, maintainable software solutions.</p>
       <a class="btn" href="#projects">View My Work</a>
       <a class="btn ghost" href="resume/Inrective Resume.pdf" download>Download Resume</a>
     </div>
   </section>
 
   <main>
-    <section id="about" class="card">
+    <section id="about" class="card stagger" style="--delay:0.2s;">
       <h2>About Me</h2>
-      <p>Hi, I'm <strong>Mohammed Ashif</strong> — a highly motivated Computer Science Engineer currently pursuing my Bachelor's in Engineering and Technology from Noida International University (2022–2026). I'm passionate about software development, problem-solving, and creating scalable Java-based applications. I specialize in backend development using Java, Spring Boot, and MySQL.</p>
+      <p>I'm <strong>Mohammed Ashif</strong> — a Computer Science Engineer pursuing my B.Tech at Noida International University (2022–2026). I enjoy building real-world Java applications that solve meaningful problems.</p>
       <ul>
         <li><strong>Location:</strong> Greater Noida, Delhi</li>
         <li><strong>Phone:</strong> +91 7451894853</li>
@@ -75,67 +138,65 @@
       </ul>
     </section>
 
-    <section id="projects" class="card">
+    <section id="projects" class="card stagger" style="--delay:0.3s;">
       <h2>Projects</h2>
       <div class="projects-grid">
         <div class="proj">
           <h4>Handwriting Converter</h4>
-          <p>Java Swing + iText7 based desktop app that converts typed text into a handwritten-style document on textured paper. Output can be previewed, saved as PNG, or exported as A4 PDF.</p>
-          <p><strong>Tech:</strong> Java, Java Swing, AWT Graphics2D, iText7</p>
+          <p>Java Swing app that converts typed text into a realistic handwritten format using AWT and iText7.</p>
+          <p><strong>Tech:</strong> Java, AWT, iText7</p>
           <a href="https://github.com/Ashif2601/Handwriting-Converter" target="_blank">View on GitHub →</a>
         </div>
         <div class="proj">
           <h4>Tiffin Service App</h4>
-          <p>A console-based food ordering system built in Java. Allows customers to place and manage orders, view menu items, and simulate a tiffin service workflow.</p>
-          <p><strong>Tech:</strong> Java, JDK 8, IntelliJ IDEA</p>
+          <p>Java console-based app for managing daily food orders and customer data.</p>
+          <p><strong>Tech:</strong> Java, IntelliJ IDEA</p>
           <a href="https://github.com/Ashif2601/Tiffin-Service-App" target="_blank">View on GitHub →</a>
         </div>
         <div class="proj">
           <h4>Student Management System</h4>
-          <p>Spring Boot application for managing student records via REST APIs. Supports CRUD operations with MySQL database integration.</p>
-          <p><strong>Tech:</strong> Java 17, Spring Boot, JPA, Maven, Lombok</p>
+          <p>Spring Boot REST API for managing student data using MySQL database.</p>
+          <p><strong>Tech:</strong> Java, Spring Boot, MySQL</p>
           <a href="https://github.com/Ashif2601/Student-Management-System" target="_blank">View on GitHub →</a>
         </div>
         <div class="proj">
           <h4>Hospital Management System</h4>
-          <p>Java project for efficiently managing patient and doctor data, supporting essential hospital management operations.</p>
-          <p><strong>Tech:</strong> Java, JDK 8, IntelliJ IDEA</p>
+          <p>Java-based CRUD project for hospital record management.</p>
+          <p><strong>Tech:</strong> Java, MySQL</p>
           <a href="https://github.com/Ashif2601/Hospital-Management-System" target="_blank">View on GitHub →</a>
         </div>
       </div>
     </section>
 
-    <section id="skills" class="card">
+    <section id="skills" class="card stagger" style="--delay:0.4s;">
       <h2>Skills</h2>
       <ul>
         <li><strong>Languages:</strong> Java, Python, SQL, HTML, CSS, JavaScript, C</li>
         <li><strong>Frameworks/Technologies:</strong> Spring Boot, MySQL, JDBC, GitHub</li>
-        <li><strong>Developer Tools:</strong> IntelliJ IDEA, VS Code, Visual Studio, Oracle</li>
+        <li><strong>Developer Tools:</strong> IntelliJ IDEA, VS Code, Visual Studio</li>
         <li><strong>Core Areas:</strong> DSA, OOPs, DBMS, Software Engineering</li>
       </ul>
     </section>
 
-    <section id="resume" class="card">
+    <section id="resume" class="card stagger" style="--delay:0.5s;">
       <h2>Resume</h2>
-      <p>Download or view my resume below:</p>
       <a class="btn" href="resume/Inrective Resume.pdf" download>Download Resume</a>
       <div class="resume-embed" style="height:500px;margin-top:10px;border:1px solid #e6eefc;border-radius:8px;overflow:hidden">
         <iframe src="resume/Inrective Resume.pdf" style="width:100%;height:100%;border:0"></iframe>
       </div>
     </section>
 
-    <section id="contact" class="card">
+    <section id="contact" class="card stagger" style="--delay:0.6s;">
       <h2>Contact</h2>
-      <p>If you have a project opportunity or collaboration idea, feel free to reach out!</p>
       <p><strong>Email:</strong> <a href="mailto:Ashifm0000@gmail.com">Ashifm0000@gmail.com</a></p>
       <p><strong>Phone:</strong> +91 7451894853</p>
       <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/ashif2601">linkedin.com/in/ashif2601</a></p>
       <p><strong>GitHub:</strong> <a href="https://github.com/Ashif2601">github.com/Ashif2601</a></p>
     </section>
 
-    <section id="blog" class="card">
+    <section id="blog" class="card stagger" style="--delay:0.7s;">
       <h2>Blog</h2>
-      <p>Coming soon — I’ll share Java tutorials, Spring Boot guides, and project write-ups here.</p>
+      <p>Coming soon — Java tutorials, Spring Boot tips, and project breakdowns.</p>
     </section>
   </main>
 
@@ -143,8 +204,46 @@
     © <span id="year"></span> Mohammed Ashif — Built with HTML/CSS/JS
   </footer>
 </div>
+
 <script>
+  // Year auto update
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Intersection fade animation
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.card, .hero').forEach(el => observer.observe(el));
+
+  // Smooth nav + active section highlight
+  const navLinks = document.querySelectorAll('nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      document.querySelector(link.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  const sections = document.querySelectorAll('main section, .hero');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 150;
+      if (scrollY >= top) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+    });
+  });
 </script>
 </body>
 </html>
